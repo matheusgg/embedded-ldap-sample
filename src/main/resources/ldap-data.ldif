@@ -1,0 +1,112 @@
+#######################################################################################
+# SCHEMA
+#######################################################################################
+dn: cn=microsoft, ou=schema
+objectclass: metaSchema
+objectclass: top
+cn: microsoft
+
+dn: ou=attributetypes, cn=microsoft, ou=schema
+objectclass: organizationalUnit
+objectclass: top
+ou: attributetypes
+
+dn: m-oid=1.2.840.113556.1.4.221, ou=attributetypes, cn=microsoft, ou=schema
+objectclass: metaAttributeType
+objectclass: metaTop
+objectclass: top
+m-oid: 1.2.840.113556.1.4.221
+m-name: sAMAccountName
+m-equality: caseIgnoreMatch
+m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
+m-singleValue: TRUE
+
+dn: m-oid=1.2.840.113556.1.4.222, ou=attributetypes, cn=microsoft, ou=schema
+objectclass: metaAttributeType
+objectclass: metaTop
+objectclass: top
+m-oid: 1.2.840.113556.1.4.222
+m-name: member
+m-equality: caseIgnoreMatch
+m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
+m-singleValue: FALSE
+
+dn: m-oid=1.2.840.113556.1.4.223, ou=attributetypes, cn=microsoft, ou=schema
+objectclass: metaAttributeType
+objectclass: metaTop
+objectclass: top
+m-oid: 1.2.840.113556.1.4.223
+m-name: account
+m-equality: caseIgnoreMatch
+m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
+m-singleValue: TRUE
+
+dn: ou=objectclasses, cn=microsoft, ou=schema
+objectclass: organizationalUnit
+objectclass: top
+ou: objectClasses
+
+dn: m-oid=1.2.840.113556.1.5.7, ou=objectclasses, cn=microsoft, ou=schema
+objectclass: metaObjectClass
+objectclass: metaTop
+objectclass: top
+m-oid: 1.2.840.113556.1.5.7
+m-name: people
+m-supObjectClass: top
+m-typeObjectClass: AUXILIARY
+m-must: sAMAccountName
+m-must: account
+
+dn: m-oid=1.2.840.113556.1.5.8, ou=objectclasses, cn=microsoft, ou=schema
+objectclass: metaObjectClass
+objectclass: metaTop
+objectclass: top
+m-oid: 1.2.840.113556.1.5.8
+m-name: group
+m-supObjectClass: top
+m-typeObjectClass: AUXILIARY
+m-may: member
+
+#######################################################################################
+# GROUPS
+#######################################################################################
+
+dn: ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+dn: ou=admins,ou=groups,dc=springframework,dc=org
+objectclass: organizationalUnit
+objectclass: group
+ou: admins
+member: cn=admin,dc=springframework,dc=org
+
+dn: ou=developers,ou=groups,dc=springframework,dc=org
+objectclass: organizationalUnit
+objectclass: group
+ou: developers
+member: cn=matheus.goes,dc=springframework,dc=org
+member: cn=admin,dc=springframework,dc=org
+
+#######################################################################################
+# USERS
+#######################################################################################
+
+dn: cn=admin,dc=springframework,dc=org
+objectclass: person
+objectclass: people
+cn: admin
+sn: admin
+account: cn=admin
+sAMAccountName: admin
+userPassword: admin
+
+dn: cn=matheus.goes,dc=springframework,dc=org
+objectclass: person
+objectclass: people
+cn: matheus.goes
+sn: Matheus
+account: cn=matheus.goes
+sAMAccountName: matheus.goes
+userPassword: 12345
